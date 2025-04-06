@@ -56,7 +56,7 @@ virtual-deal-room/
 ## Environment Variables:
 
     backend/.env
-        PORT=5000
+        PORT=3000
         JWT_SECRET=your_jwt_secret
         MONGODB_URI=your_mongodb_uri
         FRONTEND_URL=http://localhost:5173
@@ -65,6 +65,9 @@ virtual-deal-room/
         CLOUDINARY_CLOUD_NAME=youe_cloud_name
         CLOUDINARY_API_KEY=your_api_key
         CLOUDINARY_API_SECRET=your_api_secret
+
+    frontend/.env
+        VITE_BACKEND_URL=http://localhost:3000
 
 
 ## Installation & Setup:
@@ -78,7 +81,7 @@ virtual-deal-room/
         2. Install dependencies: npm install
         3. Create .env file based on the environment variables above cp .env.example .env  # Then edit the .env file with your values
         4. Start the server: npm start
-        5. The server will run on http://localhost:5000 by default.
+        5. The server will run on http://localhost:3000 by default.
 
     frontend setup:
         1. Navigate to the client directory: cd client

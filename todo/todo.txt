@@ -1,11 +1,12 @@
 
+hosting
 the context isn't working
 fix the contact owner button working
 
 
 TODO :- 
     edit post
-    edit, delete, upadate chat
+    edit, delete, upadate chatf
     show my deals
     understand bidding system
     file upload in conversation
