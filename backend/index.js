@@ -11,7 +11,7 @@ const postRoute = require('./routes/postRoute')
 const app = express();
 const server = http.createServer(app);
 
-// Initialize Socket.io with the server
+// initialize Socket.io with the server
 const io = socketIO.init(server);
 
 //database connection
@@ -75,8 +75,6 @@ app.get('/', (req, res) => {
 });
 
 
-
-module.exports = { app, server }; // No need to export io here
 
 server.listen(3000, () => {
   console.log('Server running on port 3000');

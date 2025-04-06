@@ -7,18 +7,17 @@ class ErrorBoundary extends Component {
   }
 
   static getDerivedStateFromError(error) {
-    // Update state so the next render shows the fallback UI
+    // update state so the next render shows the fallback UI
     return { hasError: true };
   }
 
   componentDidCatch(error, errorInfo) {
-    // You can log the error to an error reporting service
     console.error("Error caught by boundary:", error, errorInfo);
   }
 
   render() {
     if (this.state.hasError) {
-      // You can render any custom fallback UI
+      // fallback UI
       return (
         <div className="flex flex-col items-center justify-center min-h-screen p-4">
           <h2 className="text-2xl font-bold text-red-600 mb-2">Something went wrong</h2>

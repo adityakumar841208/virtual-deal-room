@@ -9,13 +9,13 @@ export const SocketProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    // Initialize socket connection
-    const newSocket = io('http://localhost:3000');
+    // initialize socket connection
+    const newSocket = io(`${import.meta.env.VITE_BACKEND_URL}`);
     setSocket(newSocket);
 
     console.log('Socket connected');
 
-    // Disconnect socket when component unmounts
+    // disconnect socket when component unmounts
     return () => {
       if (newSocket) {
         console.log('Socket disconnected');

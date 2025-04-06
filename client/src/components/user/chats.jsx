@@ -16,12 +16,12 @@ const ChatPage = () => {
     setSelectedChat(chatId);
   };
   
-  // Listen for new messages in any chat
+  // listen for new messages in any chat
   useEffect(() => {
     if (!socket) return;
     
     socket.on('message received', (newMessage) => {
-      // You could add notification logic here
+      // notification logic here
       console.log('New message received:', newMessage);
     });
     
@@ -32,9 +32,9 @@ const ChatPage = () => {
 
   return (
     <div className="flex h-[calc(100vh-80px)] bg-gray-50 rounded-x overflow-hidden">
-      {/* Sidebar with chat list */}
+      {/* sidebar with chat list */}
       <div className="w-1/3 bg-white border-r border-gray-200 flex flex-col">
-        {/* Header with search and new chat button */}
+        {/* header with search and new chat button */}
         <div className="p-4 border-b border-gray-200">
           <h1 className="text-xl font-semibold mb-4 flex items-center text-gray-800">
             <BiMessageDetail className="mr-2 text-blue-600" />
@@ -72,7 +72,7 @@ const ChatPage = () => {
           </div>
         </div>
         
-        {/* Chat list */}
+        {/* chat list */}
         <div className="overflow-y-auto flex-grow">
           <ChatList 
             onSelectChat={handleSelectChat} 
@@ -82,7 +82,7 @@ const ChatPage = () => {
         </div>
       </div>
       
-      {/* Main chat area */}
+      {/* main chat area */}
       <div className="w-2/3 flex flex-col">
         {selectedChat ? (
           <ChatBox chatId={selectedChat} />
@@ -106,7 +106,7 @@ const ChatPage = () => {
         )}
       </div>
       
-      {/* New chat modal */}
+      {/* new chat modal */}
       {showNewChatModal && (
         <NewChatModal onClose={() => setShowNewChatModal(false)} onChatCreated={handleSelectChat} />
       )}
@@ -114,7 +114,7 @@ const ChatPage = () => {
   );
 };
 
-// New Chat Modal Component
+// new Chat Modal Component
 const NewChatModal = ({ onClose, onChatCreated }) => {
   const [step, setStep] = useState(1);
   const [selectedUsers, setSelectedUsers] = useState([]);
@@ -124,18 +124,18 @@ const NewChatModal = ({ onClose, onChatCreated }) => {
   const [loading, setLoading] = useState(false);
   const { state } = useAppContext();
 
-  // Fetch users when modal opens
+  // ftetch users when modal opens
   useEffect(() => {
     const fetchUsers = async () => {
       setLoading(true);
       try {
-        const response = await fetch('http://localhost:3000/api/users/all', {
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/all`, {
           credentials: 'include'
         });
         
         if (response.ok) {
           const data = await response.json();
-          // Filter out current user
+          // filter out current user
           const filteredUsers = data.users.filter(user => user._id !== state.id);
           setUsers(filteredUsers);
         }
@@ -173,7 +173,7 @@ const NewChatModal = ({ onClose, onChatCreated }) => {
       
       const participantIds = [state.id, ...selectedUsers.map(u => u._id)];
       
-      const response = await fetch('http://localhost:3000/api/chat/create', {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/chat/create`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -201,7 +201,7 @@ const NewChatModal = ({ onClose, onChatCreated }) => {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white rounded-xl shadow-xl w-full max-w-md overflow-hidden">
-        {/* Header */}
+        {/* header */}
         <div className="border-b border-gray-200 px-6 py-4 flex justify-between items-center">
           <h3 className="font-semibold text-lg text-gray-800">
             {step === 1 ? 'New Conversation' : 'Set Chat Details'}
@@ -216,7 +216,7 @@ const NewChatModal = ({ onClose, onChatCreated }) => {
         <div className="p-6">
           {step === 1 ? (
             <>
-              {/* Search input */}
+              {/* search input */}
               <div className="mb-4 relative">
                 <BiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                 <input
@@ -228,7 +228,7 @@ const NewChatModal = ({ onClose, onChatCreated }) => {
                 />
               </div>
               
-              {/* Selected users */}
+              {/* selected users */}
               {selectedUsers.length > 0 && (
                 <div className="mb-4 flex flex-wrap gap-2">
                   {selectedUsers.map(user => (
@@ -248,7 +248,7 @@ const NewChatModal = ({ onClose, onChatCreated }) => {
                 </div>
               )}
               
-              {/* User list */}
+              {/* user list */}
               <div className="overflow-y-auto max-h-60 border border-gray-200 rounded-lg">
                 {loading ? (
                   <div className="p-4 text-center text-gray-500">Loading users...</div>
@@ -332,7 +332,7 @@ const NewChatModal = ({ onClose, onChatCreated }) => {
           )}
         </div>
         
-        {/* Footer */}
+        {/* tooter */}
         <div className="border-t border-gray-200 px-6 py-4 bg-gray-50 flex justify-between">
           {step === 1 ? (
             <>

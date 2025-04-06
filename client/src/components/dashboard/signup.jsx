@@ -45,10 +45,10 @@ const Signup = () => {
       setIsLoading(true);
       
       try {
-        // Simulate API call
+        // simulate API call
         console.log("Creating account with:", formData);
         
-        const response = await fetch("http://localhost:3000/api/register", {
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/register`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

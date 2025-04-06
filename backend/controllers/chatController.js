@@ -1,9 +1,9 @@
 const Chat = require('../models/Chat');
 const Message = require('../models/Message');
-const User = require('../models/User');
+// const User = require('../models/User');
 const socketIO = require('../utils/socket');
 
-// Create a new chat/conversation
+// create a new chat/conversation
 exports.createChat = async (req, res) => {
 
   try {
@@ -42,7 +42,7 @@ exports.createChat = async (req, res) => {
   }
 };
 
-// Get a specific chat by ID
+// get a specific chat by ID
 exports.getChat = async (req, res) => {
   try {
     const { chatId } = req.params;
@@ -69,7 +69,7 @@ exports.getChat = async (req, res) => {
   }
 };
 
-// Get all chats for a specific user
+// get all chats for a specific user
 exports.getChatsByUser = async (req, res) => {
   try {
     const { userId } = req.params;
@@ -94,7 +94,7 @@ exports.getChatsByUser = async (req, res) => {
   }
 };
 
-// Send a message in a chat
+// send a message in a chat
 exports.sendMessage = async (req, res) => {
   try {
     const { chatId, senderId, content } = req.body;
@@ -163,7 +163,7 @@ exports.sendMessage = async (req, res) => {
   }
 };
 
-// Get all messages in a specific chat
+// get all messages in a specific chat
 exports.getAllMessages = async (req, res) => {
   try {
     const { chatId } = req.params;
@@ -186,7 +186,7 @@ exports.getAllMessages = async (req, res) => {
   }
 };
 
-// Delete a message
+// delete a message
 exports.deleteMessage = async (req, res) => {
   try {
     const { messageId } = req.params;
@@ -213,7 +213,7 @@ exports.deleteMessage = async (req, res) => {
   }
 };
 
-// Mark a message as read
+// mark a message as read
 exports.markAsRead = async (req, res) => {
   try {
     const { messageId } = req.params;

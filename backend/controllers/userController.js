@@ -2,22 +2,22 @@ const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-// Function to create a User
+// create a User
 const createUser = async (req, res) => {
     try {
         const { name, email, password, userType } = req.body;
 
-        // Check if user already exists
+        // check if user already exists
         const existingUser = await User.findOne({ email });
         if (existingUser) {
             return res.status(400).json({ message: 'User already exists with this email' });
         }
 
-        // Hash the password
+        // hash the password
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
-        // Create new user
+        // create new user
         const user = new User({
             name,
             email,
@@ -27,14 +27,14 @@ const createUser = async (req, res) => {
 
         await user.save();
 
-        // Generate JWT token
+        // generate JWT token
         const token = jwt.sign(
             { id: user._id, role: user.role },
             process.env.JWT_SECRET,
             { expiresIn: '30d' }
         );
 
-        // Set cookie with token
+        // set cookie with token
         res.cookie('token', token, {
             httpOnly: true,
             sameSite:'Lax',
@@ -57,31 +57,31 @@ const createUser = async (req, res) => {
     }
 };
 
-// Function to login a User
+// login a User
 const loginUser = async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        // Check if user exists
+        // check if user exists
         const user = await User.findOne({ email });
         if (!user) {
             return res.status(400).json({ message: 'Invalid credentials' });
         }
 
-        // Verify password
+        // verify password
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
             return res.status(400).json({ message: 'Invalid credentials' });
         }
 
-        // Generate JWT token
+        // generate JWT token
         const token = jwt.sign(
             { id: user._id, role: user.role },
             process.env.JWT_SECRET,
             { expiresIn: '30d' }
         );
 
-        // Set cookie with token
+        // stt cookie with token
         res.cookie('token', token, {
             httpOnly: true,
             sameSite:'Lax',
@@ -104,10 +104,10 @@ const loginUser = async (req, res) => {
     }
 };
 
-// Function to get User details
+// function to get User details
 const getUser = async (req, res) => {
     try {
-        // req.user should be set by auth middleware
+        
         const user = await User.findById(req.user.id).select('-password');
         
         if (!user) {

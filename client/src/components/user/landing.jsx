@@ -21,7 +21,7 @@ export default function Landing() {
         const fetchDeals = async () => {
             setLoading(true);
             try {
-                const response = await fetch('http://localhost:3000/api/post/', {
+                const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/post/`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ export default function Landing() {
 
     const handleDealAction = async (dealId, action) => {
         try {
-            const response = await fetch(`http://localhost:3000/api/post/${dealId}/${action}`, {
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/post/${dealId}/${action}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -85,7 +85,7 @@ export default function Landing() {
         return matchesSearch && deal.status === filter;
     });
 
-    // Function to get appropriate status badge styling
+    // get status badge styling
     const getStatusBadge = (status) => {
         switch (status) {
             case 'pending':
@@ -99,7 +99,7 @@ export default function Landing() {
         }
     };
 
-    // Add this function to handle comment input changes
+    // to handle comment input changes
     const handleCommentChange = (dealId, comment) => {
         setCommentMap({
             ...commentMap,
@@ -107,7 +107,7 @@ export default function Landing() {
         });
     };
 
-    // Add this function to your Landing component to handle starting a chat
+    // to handle starting a chat
     const startChat = async (recipientId, dealTitle) => {
         try {
             const user = localStorage.getItem('user');
@@ -118,8 +118,8 @@ export default function Landing() {
                 participants: [parsedUser.id, recipientId]
             };
 
-            // Call your backend API to create or get existing chat
-            const response = await fetch('http://localhost:3000/api/chat/create', {
+            // call backend API to create or get existing chat
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/chat/create`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -134,8 +134,8 @@ export default function Landing() {
 
             const data = await response.json();
 
-            // Navigate to the chat with this user
-            navigate(`/messages/${data.chatId}`);
+            // naviate to the chat with this user
+            navigate(`/dashboard/messages`);
         } catch (error) {
             console.error('Error starting chat:', error);
             alert('Failed to start chat. Please try again.');
@@ -144,7 +144,7 @@ export default function Landing() {
 
     return (
         <div className="min-h-screen bg-gray-50 pb-10">
-            {/* Header */}
+            {/* header */}
             <header className="bg-white shadow-sm py-6 mb-6">
                 <div className="container mx-auto px-4">
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -191,7 +191,7 @@ export default function Landing() {
                 </div>
             </header>
 
-            {/* Main content */}
+            {/* post content */}
             <div className="container mx-auto px-4">
                 {loading ? (
                     <div className="flex justify-center py-20">
@@ -225,7 +225,7 @@ export default function Landing() {
                                             className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 transition-all p-3"
                                         >
                                             <div className="flex flex-col">
-                                                {/* Card header with image */}
+                                                {/* card header with image */}
                                                 <div className="relative">
                                                     <div className="relative h-64 bg-gray-200">
                                                         {deal.image ? (
@@ -247,7 +247,7 @@ export default function Landing() {
                                                     </div>
                                                 </div>
 
-                                                {/* Card body */}
+                                                {/* card body */}
                                                 <div className="p-5">
                                                     <div className="flex justify-between items-start mb-2">
                                                         <h2 className="text-xl font-semibold text-gray-800 line-clamp-2">{deal.title}</h2>
@@ -266,10 +266,10 @@ export default function Landing() {
                                                         {deal.description}
                                                     </p>
 
-                                                    {/* Tags */}
+                                                    {/* tags */}
                                                     <div className="flex flex-wrap gap-2 mb-4">
                                                         {deal.tags && deal.tags.map((tag, index) => {
-                                                            // Handle different tag formats
+                                                            // handle different tag
                                                             let tagText = tag;
                                                             try {
                                                                 if (typeof tag === 'string' && tag.startsWith('[')) {
@@ -292,14 +292,13 @@ export default function Landing() {
                                                     </div>
 
 
-                                                    {/* Action buttons for collapsed view */}
                                                     <>
-                                                        {/* Check if current user is the post author using both context and localStorage */}
+                                                        {/* check if current user is the post author using both context and local storage */}
                                                         {(() => {
-                                                            // Try to get user from context first
+                                                            // try to get user from context first
                                                             let currentUser = state.user;
 
-                                                            // If context user is not available, try localStorage
+                                                            // if context user is not available, try local storage
                                                             if (!currentUser) {
                                                                 try {
                                                                     const localStorageUser = localStorage.getItem('user');
@@ -311,7 +310,7 @@ export default function Landing() {
                                                                 }
                                                             }
 
-                                                            // Check if user is the author
+                                                            // check if user is the author
                                                             const isAuthor = currentUser && deal.author &&
                                                                 (currentUser.email === deal.author.email);
 
@@ -358,7 +357,7 @@ export default function Landing() {
                 )}
             </div>
 
-            {/* Add Deal Modal */}
+            {/* add Deal Modal */}
             {showAddDealModal && (
                 <AddDealModal onClose={() => setShowAddDealModal(false)} />
             )}
@@ -366,7 +365,7 @@ export default function Landing() {
     );
 }
 
-// Sample data in case API fails
+// sample data in case API fails
 const sampleDeals = [
     {
         _id: '1',
@@ -383,7 +382,7 @@ const sampleDeals = [
     },
 ];
 
-// Add Deal Modal Component
+// add Deal Modal Component
 const AddDealModal = ({ onClose }) => {
     const [formData, setFormData] = useState({
         title: '',
@@ -391,7 +390,7 @@ const AddDealModal = ({ onClose }) => {
         initialPrice: '',
         tags: '',
         image: null,
-        isDeal: false, // Add this field
+        isDeal: false, // add this field
     });
     const [previewUrl, setPreviewUrl] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -414,7 +413,7 @@ const AddDealModal = ({ onClose }) => {
                 image: file
             });
 
-            // Create preview URL
+            // create preview URL
             const reader = new FileReader();
             reader.onload = () => {
                 setPreviewUrl(reader.result);
@@ -427,7 +426,7 @@ const AddDealModal = ({ onClose }) => {
         e.preventDefault();
         setError('');
 
-        // Validate form
+        // validate form
         if (!formData.title.trim()) {
             setError('Title is required');
             return;
@@ -438,7 +437,7 @@ const AddDealModal = ({ onClose }) => {
             return;
         }
 
-        // Only validate price if it's a deal
+        // only validate price if it's a deal
         if (formData.isDeal && (!formData.initialPrice || isNaN(parseFloat(formData.initialPrice)))) {
             setError('Valid price is required for deals');
             return;
@@ -447,13 +446,13 @@ const AddDealModal = ({ onClose }) => {
         setIsSubmitting(true);
 
         try {
-            // Convert tags string to array
+            // convert tags string to array
             const tagsArray = formData.tags
                 .split(',')
                 .map(tag => tag.trim())
                 .filter(tag => tag.length > 0);
 
-            // Create form data for file upload
+            // create form data for file upload
             const formDataToSend = new FormData();
             formDataToSend.append('title', formData.title);
             formDataToSend.append('description', formData.description);
@@ -476,9 +475,9 @@ const AddDealModal = ({ onClose }) => {
                 throw new Error(errorData.message || 'Failed to create post');
             }
 
-            // Close modal and refresh deals list
+            // close modal and refresh deals list
             onClose();
-            window.location.reload(); // Refresh to show the new post
+            window.location.reload(); // refresh to show the new post
 
         } catch (error) {
             console.error('Error creating post:', error);

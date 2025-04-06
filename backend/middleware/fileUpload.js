@@ -20,7 +20,7 @@ const storage = new CloudinaryStorage({
   }
 });
 
-// Check file type
+// check file type for image
 const fileFilter = (req, file, cb) => {
   const allowedTypes = /jpeg|jpg|png|gif|webp/;
   const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
@@ -35,7 +35,7 @@ const fileFilter = (req, file, cb) => {
 
 const upload = multer({
   storage: storage,
-  limits: { fileSize: 5000000 }, // 5MB max file size
+  limits: { fileSize: 5000000 }, // max - 5mb
   fileFilter: fileFilter
 });
 

@@ -17,7 +17,7 @@ const Login = () => {
     const trimmedEmail = email.trim();
     const trimmedPassword = password.trim();
 
-    // Basic validation
+    // validation
     if (!trimmedEmail) {
       setError("Email is required");
       return;
@@ -31,13 +31,13 @@ const Login = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch("http://localhost:3000/api/login", {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email: trimmedEmail, password: trimmedPassword }),
-        credentials: "include", // Important for cookies
+        credentials: "include", // important for cookies
       });
 
       const data = await response.json();
@@ -51,12 +51,12 @@ const Login = () => {
         return;
       }
 
-      // Set user data in context
+      // set user data in context
       setName(data.user.name);
       setEmail(data.user.email);
       setUserType(data.user.userType);
 
-      // Optional: persist user
+      // persist user
       localStorage.setItem("user", JSON.stringify({
         name: data.user.name,
         email: data.user.email,
@@ -64,7 +64,7 @@ const Login = () => {
         id: data.user.id,
       }));
 
-      // Navigate after successful login
+      // navigate after successful login
       navigate("/dashboard");
 
     } catch (err) {

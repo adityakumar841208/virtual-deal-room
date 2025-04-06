@@ -1,7 +1,13 @@
 
-fix the context for sure...
-then check sendmessages route
+the context isn't working
+fix the contact owner button working
 
-chat...
-file upload...
+
+TODO :- 
+    edit post
+    edit, delete, upadate chat
+    show my deals
+    understand bidding system
+    file upload in conversation
+    user profile
 

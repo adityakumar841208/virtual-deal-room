@@ -1,7 +1,7 @@
 const Post = require('../models/Post');
-const cloudinary = require('cloudinary').v2;
+// const cloudinary = require('cloudinary').v2;
 
-// Create a new post - handles both simple posts and deal posts
+// create a new post
 const createPost = async (req, res) => {
   try {
     const { 
@@ -57,7 +57,7 @@ const createPost = async (req, res) => {
   }
 };
 
-// Get all posts with optional filtering
+// get all posts with filtering
 const getAllPosts = async (req, res) => {
   try {
     // Simply get all posts sorted by creation date (newest first)
@@ -80,7 +80,7 @@ const getAllPosts = async (req, res) => {
   }
 };
 
-// Get a single deal by ID
+// get a deal by id
 const getPostById = async (req, res) => {
   try {
     const post = await Post.findById(req.params.id)
@@ -108,7 +108,7 @@ const getPostById = async (req, res) => {
   }
 };
 
-// Update a deal
+// udate a deal
 const updatePost = async (req, res) => {
   try {
     let post = await Post.findById(req.params.id);
@@ -160,7 +160,7 @@ const updatePost = async (req, res) => {
   }
 };
 
-// Delete a deal
+// delete a deal
 const deletePost = async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
@@ -197,7 +197,7 @@ const deletePost = async (req, res) => {
   }
 };
 
-// Submit a bid for a deal
+// submit a bid for a deal
 const submitBid = async (req, res) => {
   try {
     const { amount, message } = req.body;
@@ -265,7 +265,7 @@ const submitBid = async (req, res) => {
   }
 };
 
-// Respond to a bid (accept, reject, or counter)
+// respond to a bid (accept, reject, or counter) - to be done
 const respondToBid = async (req, res) => {
   try {
     const { bidId, action, counterAmount, counterMessage } = req.body;
@@ -349,7 +349,7 @@ const respondToBid = async (req, res) => {
   }
 };
 
-// Upload additional documents related to a deal
+// upload additional documents related to a deal
 const uploadDocument = async (req, res) => {
   try {
     const { title } = req.body;

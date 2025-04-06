@@ -14,13 +14,13 @@ module.exports = {
     io.on('connection', (socket) => {
       console.log('New socket connection:', socket.id);
       
-      // Join a chat room
+      // join a chat room
       socket.on('join chat', (chatId) => {
         socket.join(chatId);
         console.log(`User joined chat room: ${chatId}`);
       });
       
-      // Leave a chat room
+      // leave a chat room
       socket.on('leave chat', (chatId) => {
         socket.leave(chatId);
         console.log(`User left chat room: ${chatId}`);

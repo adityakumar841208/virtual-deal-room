@@ -24,7 +24,7 @@ const ChatList = ({ onSelectChat, selectedChatId, searchQuery = '' }) => {
 
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:3000/api/chat/user/${parsedUser.id}`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/chat/user/${parsedUser.id}`, {
         method: 'GET',
         credentials: 'include'
       });
@@ -42,7 +42,7 @@ const ChatList = ({ onSelectChat, selectedChatId, searchQuery = '' }) => {
   };
 
   const getChatName = (chat) => {
-    // For group chats, use the title
+    // for group chats, use the title
     if (chat.title && chat.title !== 'New Conversation') {
       return chat.title;
     }
@@ -77,7 +77,7 @@ const ChatList = ({ onSelectChat, selectedChatId, searchQuery = '' }) => {
     return formatDistanceToNow(new Date(date), { addSuffix: true });
   };
 
-  // Filter chats based on search query
+  // filter chats based on search query
   const filteredChats = searchQuery
     ? chats.filter(chat => {
       const chatName = getChatName(chat);

@@ -15,7 +15,7 @@ const ChatBox = ({ chatId }) => {
   const messagesEndRef = useRef(null);
   const typingTimeoutRef = useRef(null);
 
-  // Fetch chat info and messages when chat ID changes
+  // fetch chat info and messages when chat ID changes
   useEffect(() => {
     if (chatId) {
       fetchChatInfo();
@@ -38,7 +38,7 @@ const ChatBox = ({ chatId }) => {
     };
   }, [chatId, socket]);
 
-  // Socket listeners for messages and typing
+  // socket listeners for messages and typing
   useEffect(() => {
     if (!socket) return;
 
@@ -71,7 +71,7 @@ const ChatBox = ({ chatId }) => {
     };
   }, [socket, chatId]);
 
-  // Scroll to bottom when messages change
+  // scroll to bottom when messages change
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
@@ -79,7 +79,7 @@ const ChatBox = ({ chatId }) => {
   const fetchChatInfo = async () => {
     console.log('Fetching chat info for chatId:', chatId);
     try {
-      const response = await fetch(`http://localhost:3000/api/chat/${chatId}`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/chat/${chatId}`, {
         credentials: 'include'
       });
 
@@ -98,7 +98,7 @@ const ChatBox = ({ chatId }) => {
 
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:3000/api/chat/messages/${chatId}`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/chat/messages/${chatId}`, {
         credentials: 'include'
       });
 
@@ -123,7 +123,7 @@ const ChatBox = ({ chatId }) => {
 
   const markMessageAsRead = async (messageId) => {
     try {
-      await fetch(`http://localhost:3000/api/chat/message/read/${messageId}`, {
+      await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/chat/message/read/${messageId}`, {
         method: 'PUT',
         credentials: 'include'
       });
@@ -169,7 +169,7 @@ const ChatBox = ({ chatId }) => {
       };
       console.log('Sending message:', messageData);
 
-      const response = await fetch('http://localhost:3000/api/chat/message/send', {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/chat/message/send`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -256,9 +256,8 @@ const ChatBox = ({ chatId }) => {
         </div>
       </div>
 
-      {/* Messages area - use flex-1 to take available space */}
       <div className="flex-1 overflow-y-auto p-4 bg-gray-50">
-        {/* Message content remains the same */}
+
         {messages.map((message, index) => {
           const isOwnMessage = message.sender._id === userID;
           const showSender = index === 0 || messages[index - 1].sender._id !== message.sender._id;
@@ -315,7 +314,7 @@ const ChatBox = ({ chatId }) => {
         <div ref={messagesEndRef}></div>
       </div>
 
-      {/* Message input - sticky at bottom */}
+      {/* message input - sticky at bottom */}
       <div className="sticky bottom-0 border-t border-gray-200 p-3 bg-gray-100 z-10">
         <form onSubmit={sendMessage} className="flex items-center space-x-2">
           <button

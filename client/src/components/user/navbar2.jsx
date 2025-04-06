@@ -8,11 +8,11 @@ export default function Navbar2() {
   const [username, setUsername] = useState('');
 
   useEffect(() => {
-    // Check if user data exists in state
+    // check if user data exists in state
     if (state.user && state.user.name) {
       setUsername(state.user.name);
     } else {
-      // Fallback to localStorage if state doesn't have the user info
+      // fallback to localStorage if state doesn't have the user info
       const userData = localStorage.getItem('user');
       if (userData) {
         try {
@@ -23,7 +23,7 @@ export default function Navbar2() {
         }
       }
     }
-  }, [state.user]); // Re-run when state.user changes
+  }, [state.user]); // re-run when state.user changes
 
   return (
     <div className="flex items-center justify-between px-4 py-[22px] border-b sticky top-0 bg-white shadow-md z-20">

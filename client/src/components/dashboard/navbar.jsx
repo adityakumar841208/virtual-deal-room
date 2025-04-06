@@ -7,7 +7,7 @@ export default function Navbar() {
   return (
     <nav className="bg-white shadow-md py-4 px-6 fixed w-full top-0 z-50">
       <div className="container mx-auto flex justify-between items-center">
-        {/* Logo */}
+        {/* logo */}
         <div className="font-bold text-xl text-indigo-600">
           <a href="/" className="flex items-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -17,11 +17,11 @@ export default function Navbar() {
           </a>
         </div>
 
-        {/* Desktop Menu */}
+        {/* desktop menu */}
         <div className="hidden md:flex items-center space-x-8">
           <a href="/" className="text-gray-600 hover:text-indigo-600 transition-colors">Home</a>
           
-          {/* Auth Links */}
+          {/* auth links */}
           <div className="flex items-center space-x-4">
             <Link to="/login" className="text-indigo-600 hover:text-indigo-800 font-medium transition-colors">
               Login
@@ -32,7 +32,7 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* mobile menu button */}
         <div className="md:hidden">
           <button 
             onClick={() => setIsOpen(!isOpen)}
@@ -49,7 +49,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* mobile menu */}
       {isOpen && (
         <div className="md:hidden mt-4 px-4 pb-4 space-y-4">
           <a href="/" className="block text-gray-600 hover:text-indigo-600 transition-colors">Home</a>

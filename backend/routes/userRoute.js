@@ -12,6 +12,6 @@ router.post('/register', createUser);
 router.get('/getuser', authMiddleware, getUser);
 
 //route to logout user
-router.get('/logout', logoutUser);
+// router.get('/logout', logoutUser);
 
 module.exports = router;

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 export default function Home() {
     return (
         <div className="w-full">
-            {/* Hero Section */}
+            {/* hero Section */}
             <section className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-20 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-5xl mx-auto">
                     <h1 className="text-4xl md:text-5xl font-bold mb-6">Secure, Efficient Deal Management Platform</h1>
@@ -16,7 +16,7 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* Features Section */}
+            {/* features Section */}
             <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
                 <div className="max-w-6xl mx-auto">
                     <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">Why Choose Our Virtual Deal Room</h2>
@@ -55,7 +55,7 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* How It Works Section */}
+            {/* how tt Works Section */}
             <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
                 <div className="max-w-6xl mx-auto">
                     <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">How Our Virtual Deal Room Works</h2>
