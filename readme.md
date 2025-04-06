@@ -1,20 +1,30 @@
-# Virtual Deal Room
+Here’s a cleaned-up and properly formatted version of your documentation for **Virtual Deal Room**:
+
+---
+
+# **Virtual Deal Room**
 
 A real estate marketplace platform with integrated messaging, property listings, and document management capabilities.
 
-## Table of Contents
-- [Folder Structure](#folder-structure)
-- [Environment Variables](#environment-variables)
-- [Installation & Setup](#installation--setup)
-- [Running the Application](#running-the-application)
-- [Key Features](#key-features)
-- [Working Workflow](#working-workflow)
-- [API Documentation](#api-documentation)
-- [Technologies Used](#technologies-used)
-- [Current Development Status](#current-development-status)
+---
 
-## Folder Structure:
+## **Table of Contents**
 
+- [Folder Structure](#folder-structure)  
+- [Environment Variables](#environment-variables)  
+- [Installation & Setup](#installation--setup)  
+- [Running the Application](#running-the-application)  
+- [Key Features](#key-features)  
+- [Working Workflow](#working-workflow)  
+- [API Documentation](#api-documentation)  
+- [Technologies Used](#technologies-used)  
+- [Current Development Status](#current-development-status)  
+
+---
+
+## **Folder Structure**
+
+```
 virtual-deal-room/
 ├── backend/                   # Server-side code
 │   ├── config/                # Database configuration
@@ -25,7 +35,7 @@ virtual-deal-room/
 │   ├── routes/                # API routes
 │   ├── utils/                 # Utility functions
 │   │   └── socket.js          # Socket.io configuration
-│   ├── uploads/               # Temporary storage for file uploads
+│   ├── uploads/               # Temporary file storage
 │   ├── .env                   # Server environment variables
 │   ├── index.js               # Main server entry point
 │   └── package.json           # Server dependencies
@@ -51,89 +61,110 @@ virtual-deal-room/
 │
 ├── README.md                  # Project documentation
 └── todo/                      # Development planning notes
+```
 
+---
 
-## Environment Variables:
+## **Environment Variables**
 
-    backend/.env
-        PORT=3000
-        JWT_SECRET=your_jwt_secret
-        MONGODB_URI=your_mongodb_uri
-        FRONTEND_URL=http://localhost:5173
+### `backend/.env`
+```
+PORT=3000
+JWT_SECRET=your_jwt_secret
+MONGODB_URI=your_mongodb_uri
+FRONTEND_URL=http://localhost:5173
 
-        # cloud config
-        CLOUDINARY_CLOUD_NAME=youe_cloud_name
-        CLOUDINARY_API_KEY=your_api_key
-        CLOUDINARY_API_SECRET=your_api_secret
+# Cloudinary configuration
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+```
 
-    frontend/.env
-        VITE_BACKEND_URL=http://localhost:3000
+### `frontend/.env`
+```
+VITE_BACKEND_URL=http://localhost:3000
+```
 
+---
 
-## Installation & Setup:
-    Prerequisites-
-        Node.js (v16.x or higher)
-        MongoDB (local installation or MongoDB Atlas)
-        Cloudinary account for file storage
+## **Installation & Setup**
 
-    backend setup:
-        1. Navigate to the backend directory: cd backend
-        2. Install dependencies: npm install
-        3. Create .env file based on the environment variables above cp .env.example .env  # Then edit the .env file with your values
-        4. Start the server: npm start
-        5. The server will run on http://localhost:3000 by default.
+### **Prerequisites**
+- Node.js (v16.x or higher)  
+- MongoDB (local or MongoDB Atlas)  
+- Cloudinary account (for file uploads)  
 
-    frontend setup:
-        1. Navigate to the client directory: cd client
-        2. Install dependencies: npm install
-        3. Create .env file based on the environment variables above cp .env.example .env  # Then edit the .env file with your values
-        4. Start the frontend: npm run dev
-        5. The frontend will run on http://localhost:5173 by default.
+---
 
+### **Backend Setup**
+```bash
+cd backend
+npm install
+cp .env.example .env  # Then configure the .env file
+npm start
+```
+> The server will run at `http://localhost:3000`
 
+---
 
-## API Documentation:
+### **Frontend Setup**
+```bash
+cd client
+npm install
+cp .env.example .env  # Then configure the .env file
+npm run dev
+```
+> The frontend will run at `http://localhost:5173`
 
-    - Authentication:
-        - POST /api/auth/register: Register a new user
-        - POST /api/auth/login: Login an existing user
-        - GET /api/auth/logout: Logout the current user
+---
 
-    - Chat Endpoints:
-        - GET /api/chat - Get all user's chats
-        - POST /api/chat - Create a new chat
-        - GET /api/chat/:chatId - Get a specific chat
-        - GET /api/chat/messages/:chatId - Get all messages for a chat
-        - POST /api/chat/message/send - Send a new message
-        - PUT /api/chat/message/read/:messageId - Mark message as read
-        - POST /api/chat/upload - Upload file attachment for chat - to be completed
+## **API Documentation**
 
+### **Authentication**
+- `POST /api/auth/register` – Register a new user  
+- `POST /api/auth/login` – Login an existing user  
+- `GET /api/auth/logout` – Logout the current user  
 
-## Technologies Used: 
+### **Chat Endpoints**
+- `GET /api/chat` – Get all user's chats  
+- `POST /api/chat` – Create a new chat  
+- `GET /api/chat/:chatId` – Get a specific chat  
+- `GET /api/chat/messages/:chatId` – Get messages of a chat  
+- `POST /api/chat/message/send` – Send a message  
+- `PUT /api/chat/message/read/:messageId` – Mark message as read  
+- `POST /api/chat/upload` – Upload a file (in-progress)  
 
-    Backend:
-        Node.js & Express.js
-        MongoDB & Mongoose
-        Socket.IO for real-time communication
-        JWT for authentication
-        Multer & Cloudinary for file uploads
+---
 
-    Frontend:
-        React (with Vite build tool)
-        React Context API for state management
-        Socket.IO client for real-time features
-        React Router for navigation
-        Chakra UI / Tailwind CSS for styling
+## **Technologies Used**
 
+### **Backend**
+- Node.js & Express.js  
+- MongoDB & Mongoose  
+- Socket.IO for real-time communication  
+- JWT for authentication  
+- Multer + Cloudinary for file handling  
 
-Current Development Status:
-    The following features are currently under development:
+### **Frontend**
+- React (with Vite)  
+- React Context API  
+- Socket.IO client  
+- React Router  
+- Tailwind CSS  
 
-        ⏳ File upload in conversations (in progress)
-        🔄 Edit post functionality
-        🔄 Edit, delete, and update chat functionality
-        🔄 "Show my deals" feature
-        🔄 Bidding system implementation
-        🔄 User profile page
-        🔄 Context API issues (needs fixing)
-        🔄 Contact owner button functionality (needs fixing)
+---
+
+## **Current Development Status**
+
+The following features are **in progress**:
+
+- ⏳ File upload in conversations  
+- 🔄 Edit post functionality  
+- 🔄 Edit, delete & update chat functionality  
+- 🔄 "Show My Deals" feature  
+- 🔄 Bidding system implementation  
+- 🔄 User profile page  
+- 🛠 Context API issue (bug fix required)  
+- 🛠 "Contact Owner" button functionality  
+
+---
