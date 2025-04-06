@@ -1,13 +1,14 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
     confirmPassword: "",
-    role: "buyer"
+    userType: "buyer"
   });
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -56,13 +57,18 @@ const Signup = () => {
           credentials: "include",
         });
 
-        const data = await response.json();
-        setIsLoading(false)
-        console.log(data);
-
         if (!response.ok) {
           throw new Error(data.message || "Signup failed");
         }
+
+        const data = await response.json();
+        // save details to local storage or context
+        localStorage.setItem("user", JSON.stringify(data.user));
+        // Redirect to dashboard or home page
+        navigate("/dashboard");
+
+        setIsLoading(false)
+
         
       } catch (error) {
         console.error("Signup failed:", error);
@@ -149,9 +155,9 @@ const Signup = () => {
               I am a
             </label>
             <select
-              name="role"
+              name="userType"
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-              value={formData.role}
+              value={formData.userType}
               onChange={handleChange}
               disabled={isLoading}
             >
